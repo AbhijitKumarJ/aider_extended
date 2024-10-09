@@ -21,7 +21,7 @@ from pathlib import Path
 from aider import __version__, models, prompts, urls, utils
 from aider.commands import Commands
 from aider.history import ChatSummary
-from aider.io import ConfirmGroup, InputOutput
+from aider.io import ConfirmGroup, CLIIO
 from aider.linter import Linter
 from aider.llm import litellm
 from aider.repo import ANY_GIT_ERROR, GitRepo
@@ -279,7 +279,7 @@ class Coder:
             fnames = []
 
         if io is None:
-            io = InputOutput()
+            io = CLIIO()
 
         if aider_commit_hashes:
             self.aider_commit_hashes = aider_commit_hashes

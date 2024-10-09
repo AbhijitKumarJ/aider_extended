@@ -390,6 +390,7 @@ class InputOutput:
         def _(event):
             event.current_buffer.insert_text("\n")
 
+        print(f"\n\n--------------Hi, this is experiment code.--------------------\n\n")
         while True:
             if multiline_input:
                 show = ". "

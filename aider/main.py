@@ -17,7 +17,7 @@ from aider.coders import Coder
 from aider.commands import Commands, SwitchCoder
 from aider.format_settings import format_settings, scrub_sensitive_info
 from aider.history import ChatSummary
-from aider.io import InputOutput
+from aider.io import CLIIO, ConfirmGroup
 from aider.llm import litellm  # noqa: F401; properly init litellm on launch
 from aider.repo import ANY_GIT_ERROR, GitRepo
 from aider.report import report_uncaught_exceptions
@@ -446,7 +446,7 @@ def main(argv=None, input=None, output=None, force_git_root=None, return_coder=F
     editing_mode = EditingMode.VI if args.vim else EditingMode.EMACS
 
     def get_io(pretty):
-        return InputOutput(
+        return CLIIO(
             pretty,
             args.yes_always,
             args.input_history_file,
@@ -470,6 +470,7 @@ def main(argv=None, input=None, output=None, force_git_root=None, return_coder=F
         )
 
     io = get_io(args.pretty)
+    io.set_commands(["/help", "/quit", "/add", "/ask", "/undo"])
     try:
         io.rule()
     except UnicodeEncodeError as err:
